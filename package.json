@@ -2,18 +2,25 @@
   "name": "typescript-event",
   "version": "0.0.2",
   "description": "Typed event written on typescript",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "esm/index.d.ts",
+  "module": "esm/index.js",
   "scripts": {
     "test": "jest",
-    "build": "yarn clean && tsc",
-    "clean": "rimraf ./dist",
     "lint": "tslint ./src/**/*.ts",
-    "release": "standard-version"
+    "release": "standard-version",
+    "build": "npm-run-all -p build:esm build:commonjs",
+    "build:esm": "rimraf esm && tsc --outDir esm --module es6 --declaration true",
+    "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs"
   },
   "hooks": {
     "pre-push": "yarn lint && yarn test && yarn build"
   },
+  "files": [
+    "dist/**/*",
+    "esm/**/*"
+  ],
   "author": "Igor Babkin <igba14@gmail.com>",
   "license": "ISC",
   "devDependencies": {
@@ -22,6 +29,7 @@
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "moq.ts": "^3.0.0",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
     "standard-version": "^6.0.1",
     "ts-jest": "^24.0.2",
