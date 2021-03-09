@@ -10,9 +10,10 @@
     "test": "jest",
     "lint": "tslint ./src/**/*.ts",
     "release": "standard-version",
-    "build": "npm-run-all -p build:esm build:commonjs",
+    "build": "npm-run-all -p build:*",
     "build:esm": "rimraf esm && tsc --outDir esm --module es6 --declaration true",
-    "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs"
+    "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs",
+    "prepublish": "npm test && npm build"
   },
   "hooks": {
     "pre-push": "yarn lint && yarn test && yarn build"
