@@ -13,7 +13,7 @@
     "build": "npm-run-all -p build:*",
     "build:esm": "rimraf esm && tsc --outDir esm --module es6 --declaration true",
     "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs",
-    "prepublish": "npm test && npm build"
+    "prepublish": "npm test && npm run build"
   },
   "hooks": {
     "pre-push": "yarn lint && yarn test && yarn build"
