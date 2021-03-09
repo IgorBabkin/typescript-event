@@ -1,7 +1,12 @@
 {
   "name": "typescript-event",
-  "version": "1.0.3",
+  "version": "0.0.0-development",
   "description": "Typed event written on typescript",
+  "keywords": [
+    "typed-event",
+    "event",
+    "typescript"
+  ],
   "sideEffects": false,
   "main": "dist/index.js",
   "types": "esm/index.d.ts",
@@ -9,11 +14,10 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint ./src/**/*.ts",
-    "release": "standard-version",
     "build": "npm-run-all -p build:*",
     "build:esm": "rimraf esm && tsc --outDir esm --module es6 --declaration true",
     "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs",
-    "prepublish": "npm test && npm run build"
+    "release": "semantic-release"
   },
   "hooks": {
     "pre-push": "yarn lint && yarn test && yarn build"
@@ -25,16 +29,55 @@
   "author": "Igor Babkin <igba14@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.3",
+    "cz-conventional-changelog": "3.1.0",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
+    "lint-staged": "^10.5.4",
     "moq.ts": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
+    "semantic-release": "^17.4.1",
     "standard-version": "^6.0.1",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IgorBabkin/typescript-event"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ]
+  },
+  "lint-staged": {
+    "*.ts": ["npm lint -- --fix"]
   }
 }

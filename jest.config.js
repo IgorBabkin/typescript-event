@@ -5,5 +5,6 @@ module.exports = {
     "transform": {
         "^.+\\.tsx?$": "ts-jest"
     },
-    "moduleDirectories": ["node_modules", "./src"]
+    "moduleDirectories": ["node_modules", "./src"],
+    "collectCoverage": true
 }
