@@ -17,7 +17,8 @@
     "build": "npm-run-all -p build:*",
     "build:esm": "rimraf esm && tsc --outDir esm --module es6 --declaration true",
     "build:commonjs": "rimraf dist && tsc --outDir dist --module commonjs",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "commit": "git cz"
   },
   "hooks": {
     "pre-push": "yarn lint && yarn test && yarn build"
