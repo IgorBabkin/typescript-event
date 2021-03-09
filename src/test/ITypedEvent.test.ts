@@ -1,11 +1,11 @@
-import { createEvent } from '../helpers';
+import {TypedEvent} from '../TypedEvent';
 
 describe('TypedEvent tests', () => {
     it('subscribes', () => {
         const expected = 10;
         let observerValue = 0;
 
-        const event = createEvent<number>();
+        const event = new TypedEvent<number>();
         event.on((value) => observerValue = value);
         event.raise(10);
 
@@ -15,7 +15,7 @@ describe('TypedEvent tests', () => {
     it('should be able to unsubscribe#1', () => {
         let observerHasBeenCalled = false;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         const unsubscribe = event.on(() => observerHasBeenCalled = true);
         unsubscribe();
         event.raise();
@@ -26,7 +26,7 @@ describe('TypedEvent tests', () => {
     it('should be able to unsubscribe#2', () => {
         let observerHasBeenCalled = false;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         const observer = () => observerHasBeenCalled = true;
         event.off(observer);
         event.raise();
@@ -37,7 +37,7 @@ describe('TypedEvent tests', () => {
     it('subscribe once', () => {
         let callsCount = 0;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         event.once(() => callsCount++);
         event.raise();
         event.raise();
@@ -48,7 +48,7 @@ describe('TypedEvent tests', () => {
     it('calls observer a few times', () => {
         let callsCount = 0;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         event.on(() => callsCount++);
         event.raise();
         event.raise();
@@ -59,7 +59,7 @@ describe('TypedEvent tests', () => {
     it('calls observer a few times', () => {
         let callsCount = 0;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         event.on(() => callsCount++);
         event.raise();
         event.raise();
@@ -70,7 +70,7 @@ describe('TypedEvent tests', () => {
     it('dispose', () => {
         let callsCount = 0;
 
-        const event = createEvent<void>();
+        const event = new TypedEvent<void>();
         event.on(() => callsCount++);
         event.dispose();
         event.raise();

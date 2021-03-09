@@ -5,4 +5,5 @@ export interface ITypedEvent<T> {
     off(observer: IObserver<T>): void;
     raise(data: T): void;
     dispose(): void;
+    toPromise(): Promise<T>;
 }

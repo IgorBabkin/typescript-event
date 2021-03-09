@@ -1,2 +1,2 @@
 export { ITypedEvent } from './ITypedEvent';
-export { createEvent, fromPromise, toPromise } from './helpers';
+export { TypedEvent } from './TypedEvent';

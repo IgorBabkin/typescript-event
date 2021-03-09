@@ -1,13 +1,13 @@
-import { fromPromise, toPromise } from '../helpers';
-import { timeout } from './test.helpers';
+import {TypedEvent} from '../TypedEvent';
+import {timeout} from './test.helpers';
 
 describe('helpers tests', () => {
     it('fromPromise/fromPromise', async () => {
         const expected = 10;
         const promise = timeout(() => 10, 50);
 
-        const event = fromPromise(promise);
+        const event = TypedEvent.fromPromise(promise);
 
-        expect(await toPromise(event)).toBe(expected);
+        expect(await event.toPromise()).toBe(expected);
     });
 });
