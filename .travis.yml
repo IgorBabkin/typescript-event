@@ -10,7 +10,6 @@ install:
 
 script:
   - yarn test
-  - lerna run build
-  - yarn test
   - yarn coverage:collect
+  - yarn build
   - yarn release
