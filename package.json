@@ -1,6 +1,6 @@
 {
   "name": "typescript-event",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Typed event written on typescript",
   "sideEffects": false,
   "main": "dist/index.js",
